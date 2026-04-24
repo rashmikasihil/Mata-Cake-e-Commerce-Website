@@ -198,6 +198,92 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
         .admin-link { background: #2d5a3e; color: white !important; padding: 0.5rem 1rem; border-radius: 30px; }
         .admin-link:hover { background: #1e402c !important; border-bottom: none !important; }
         
+        /* ========== LOGO STYLES - LARGE BUT NAVBAR SAME ========== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: #fffaf3;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;  /* padding එක අඩු කරලා navbar උස පාලනය කරන්න */
+            min-height: 70px;   /* navbar හරියටම තියාගන්න */
+        }
+
+        /* Logo Link */
+        .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        /* Logo Image - විශාල කරපු එක */
+        .logo-img {
+            height: 80px;        /* Logo එක විශාලයි */
+            width: auto;
+            max-height: 85px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        /* Hover එකෙදි ටිකක් විශාල වෙන්න */
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Navbar Links - Normal Size */
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+            margin: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #5a3d28;
+            font-size: 1rem;     /* link size normal */
+            padding: 0.5rem 0;
+        }
+
+        /* Cart Icon */
+        .cart-icon {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #f5e6d8;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #5a3d28;
+            font-size: 1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .logo-img {
+                height: 55px;    /* mobile එකේදි logo එක ටිකක් කුඩා කරන්න */
+            }
+            
+            .nav-wrapper {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.6rem 0;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
         /* Buttons */
         .btn { display: inline-block; padding: 0.8rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; transition: 0.3s; border: none; cursor: pointer; }
         .btn-primary { background: #c4723a; color: white; }
@@ -261,13 +347,53 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
             .cart-wrapper, .contact-wrapper { grid-template-columns: 1fr; }
             .hero h1 { font-size: 2rem; }
         }
+        /* ========== FOOTER LOGO STYLES ========== */
+        .footer-section {
+            text-align: center;
+        }
+
+        .footer-logo {
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo-img {
+            height: 80px;           /* Footer එකට සුදුසු logo size */
+            width: auto;
+            max-height: 85px;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+
+        .footer-logo-img:hover {
+            transform: scale(1.05);
+            filter: brightness(0) invert(0.8);  /* hover එකෙදි gold effect */
+        }
+
+        /* ඔයාගේ footer background එක light නම් මේ filter එක අවශ්‍ය නෑ */
+        /* light background footer එකක් නම්: */
+        .footer-logo-img-light {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Footer Text */
+        .footer-section p {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #e0cfbc;        /* footer text color */
+        }
     </style>
 </head>
 <body>
 
 <nav class="navbar">
     <div class="container nav-wrapper">
-        <div class="logo"><a href="?page=home">🍰 Mata Cake</a></div>
+        <div class="logo">
+            <a href="?page=home">
+                <img src="./image/logo.png" alt="Mata Cake Logo" class="logo-img">
+            </a>
+        </div>
         <ul class="nav-links">
             <li><a href="?page=home" class="<?php echo $page == 'home' ? 'active' : ''; ?>">Home</a></li>
             <li><a href="?page=cakes" class="<?php echo $page == 'cakes' ? 'active' : ''; ?>">Cakes</a></li>
@@ -454,7 +580,12 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 <footer>
     <div class="container">
         <div class="footer-content">
-            <div class="footer-section"><h3>🍰 Mata Cake</h3><p>Artisan bakery crafting delicious memories</p></div>
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="./image/logo.png" alt="Mata Cake" class="footer-logo-img">
+                </div>
+                <p>Artisan bakery crafting delicious memories</p>
+            </div>
             <div class="footer-section"><h4>Contact</h4><p><i class="fas fa-phone"></i> +94 77 123 4567</p><p><i class="fas fa-envelope"></i> hello@matacake.com</p></div>
             <div class="footer-section"><h4>Hours</h4><p>Mon-Sat: 9am - 7pm</p><p>Sun: 10am - 5pm</p></div>
         </div>
