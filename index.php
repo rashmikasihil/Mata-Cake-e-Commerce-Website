@@ -357,7 +357,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
         }
 
         .footer-logo-img {
-            height: 80px;           /* Footer එකට සුදුසු logo size */
+            height: 80px;     
             width: auto;
             max-height: 85px;
             object-fit: contain;
@@ -366,11 +366,9 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
         .footer-logo-img:hover {
             transform: scale(1.05);
-            filter: brightness(0) invert(0.8);  /* hover එකෙදි gold effect */
+            filter: brightness(0) invert(0.8); 
         }
 
-        /* ඔයාගේ footer background එක light නම් මේ filter එක අවශ්‍ය නෑ */
-        /* light background footer එකක් නම්: */
         .footer-logo-img-light {
             height: 50px;
             width: auto;
