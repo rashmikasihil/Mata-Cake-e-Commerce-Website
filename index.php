@@ -336,17 +336,203 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
         .alert.success { background: #d4edda; color: #155724; }
         .alert.error { background: #f8d7da; color: #721c24; }
         
-        /* Footer */
-        footer { background: #2d2418; color: #e0cfbc; padding: 3rem 0 1rem; margin-top: 3rem; }
-        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
-        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #4a3a2f; }
-        
-        @media (max-width: 768px) {
-            .nav-wrapper { flex-direction: column; gap: 1rem; }
-            .nav-links { gap: 1rem; flex-wrap: wrap; justify-content: center; }
-            .cart-wrapper, .contact-wrapper { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2rem; }
+        /* ========== FOOTER STYLES ========== */
+        footer {
+            background: #2d2418;
+            color: #e0cfbc;
+            padding: 3rem 0 1rem;
+            margin-top: 3rem;
         }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer Logo */
+        .footer-logo-img {
+            height: 50px;
+            width: auto;
+            margin-bottom: 1rem;
+           
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            margin-left: 36px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background: #4a3a2f;
+            color: #e0cfbc;
+            border-radius: 50%;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: #c4723a;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer Links */
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #e0cfbc;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: #c4723a;
+            padding-left: 5px;
+        }
+
+        .footer-section h4 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+            color: #f0dcc8;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .footer-section i {
+            color: #c4723a;
+            width: 20px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #4a3a2f;
+            font-size: 0.8rem;
+        }
+
+        .footer-bottom i {
+            color: #c4723a;
+        }
+
+        /* ========== POLICY MODAL STYLES ========== */
+        .policy-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            overflow: auto;
+        }
+
+        .policy-modal-content {
+            background-color: #fff9f2;
+            margin: 5% auto;
+            padding: 2rem;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 20px;
+            position: relative;
+            animation: modalSlide 0.3s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalSlide {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .policy-close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #c4723a;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .policy-close:hover {
+            color: #a05a2a;
+        }
+
+        #policyContent {
+            color: #2d2418;
+        }
+
+        #policyContent h2 {
+            color: #c4723a;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        #policyContent h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #2d5a3e;
+        }
+
+        #policyContent p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        #policyContent ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+                margin-left: 0px !important;
+            }
+            
+            .policy-modal-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 1.5rem;
+            }
+        }
+     
         /* ========== FOOTER LOGO STYLES ========== */
         .footer-section {
             text-align: center;
@@ -578,17 +764,241 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 <footer>
     <div class="container">
         <div class="footer-content">
+            <!-- Logo & About Section -->
             <div class="footer-section">
                 <div class="footer-logo">
                     <img src="./image/logo.png" alt="Mata Cake" class="footer-logo-img">
                 </div>
-                <p>Artisan bakery crafting delicious memories</p>
+                <p>Artisan bakery crafting delicious memories with love and finest ingredients since 2020.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
             </div>
-            <div class="footer-section"><h4>Contact</h4><p><i class="fas fa-phone"></i> +94 77 123 4567</p><p><i class="fas fa-envelope"></i> hello@matacake.com</p></div>
-            <div class="footer-section"><h4>Hours</h4><p>Mon-Sat: 9am - 7pm</p><p>Sun: 10am - 5pm</p></div>
+            
+            <!-- Quick Links / Services -->
+            <div class="footer-section">
+                <h4>Our Services</h4>
+                <ul class="footer-links">
+                    <li><a href="?page=cakes">Birthday Cakes</a></li>
+                    <li><a href="?page=cakes">Wedding Cakes</a></li>
+                    <li><a href="?page=custom">Custom Designs</a></li>
+                    <li><a href="?page=cakes">Cupcakes</a></li>
+                    <li><a href="?page=custom">Theme Cakes</a></li>
+                </ul>
+            </div>
+            
+            <!-- Contact Section -->
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-map-marker-alt"></i> No 42, Galle Road, Colombo 03</p>
+                <p><i class="fas fa-phone"></i> +94 77 123 4567</p>
+                <p><i class="fas fa-envelope"></i> hello@matacake.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Sat: 9am - 7pm</p>
+            </div>
+            
+            <!-- Policies Section -->
+            <div class="footer-section">
+                <h4>Information</h4>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="showPolicy('terms')">Terms & Conditions</a></li>
+                    <li><a href="#" onclick="showPolicy('privacy')">Privacy Policy</a></li>
+                    <li><a href="#" onclick="showPolicy('return')">Return & Refund Policy</a></li>
+                    <li><a href="#" onclick="showPolicy('shipping')">Shipping Policy</a></li>
+                    <li><a href="#" onclick="showPolicy('faq')">FAQ</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2025 Mata Cake. All rights reserved.</p></div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Mata Cake. All rights reserved. | Designed with <i class="fas fa-heart"></i> for cake lovers</p>
+        </div>
     </div>
 </footer>
+
+<!-- Policy Modal (Popup for Terms, Privacy, Return etc.) -->
+<div id="policyModal" class="policy-modal">
+    <div class="policy-modal-content">
+        <span class="policy-close">&times;</span>
+        <div id="policyContent"></div>
+    </div>
+</div>
 </body>
+<script>
+   // Policy Modal Functions
+function showPolicy(type) {
+    const modal = document.getElementById('policyModal');
+    const contentDiv = document.getElementById('policyContent');
+    
+    let content = '';
+    
+    switch(type) {
+        case 'terms':
+            content = getTermsContent();
+            break;
+        case 'privacy':
+            content = getPrivacyContent();
+            break;
+        case 'return':
+            content = getReturnContent();
+            break;
+        case 'shipping':
+            content = getShippingContent();
+            break;
+        case 'faq':
+            content = getFAQContent();
+            break;
+        default:
+            content = getTermsContent();
+    }
+    
+    contentDiv.innerHTML = content;
+    modal.style.display = 'block';
+}
+
+// Close modal
+document.querySelector('.policy-close').onclick = function() {
+    document.getElementById('policyModal').style.display = 'none';
+}
+
+// Close when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('policyModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Terms & Conditions Content
+function getTermsContent() {
+    return `
+        <h2>📜 Terms & Conditions</h2>
+        <p><strong>Last Updated:</strong> January 1, 2025</p>
+        
+        <h3>1. Order Placement</h3>
+        <p>All orders placed through our website are subject to acceptance. We reserve the right to refuse any order.</p>
+        
+        <h3>2. Pricing</h3>
+        <p>All prices are in Sri Lankan Rupees (LKR) and include applicable taxes. Prices are subject to change without notice.</p>
+        
+        <h3>3. Payment</h3>
+        <p>Full payment is required at the time of order placement. We accept cash on delivery and bank transfers.</p>
+        
+        <h3>4. Custom Cakes</h3>
+        <p>Custom cake requests require 5-7 days advance notice. Final design approval must be confirmed 48 hours before production.</p>
+        
+        <h3>5. Cancellations</h3>
+        <p>Orders can be cancelled up to 48 hours before delivery for a full refund. Custom cakes are non-refundable once production begins.</p>
+        
+        <h3>6. Contact Us</h3>
+        <p>For any questions regarding these terms, contact us at hello@matacake.com</p>
+    `;
+}
+
+// Privacy Policy Content
+function getPrivacyContent() {
+    return `
+        <h2>🔒 Privacy Policy</h2>
+        <p><strong>Last Updated:</strong> January 1, 2025</p>
+        
+        <h3>Information We Collect</h3>
+        <p>We collect personal information including name, email address, phone number, and delivery address when you place an order or contact us.</p>
+        
+        <h3>How We Use Your Information</h3>
+        <p>We use your information to process orders, communicate with you about your order, and improve our services.</p>
+        
+        <h3>Information Sharing</h3>
+        <p>We do not sell, trade, or rent your personal information to third parties.</p>
+        
+        <h3>Data Security</h3>
+        <p>We implement security measures to protect your personal information from unauthorized access.</p>
+        
+        <h3>Your Rights</h3>
+        <p>You have the right to access, correct, or delete your personal information.</p>
+        
+        <h3>Contact Us</h3>
+        <p>For privacy concerns, email privacy@matacake.com</p>
+    `;
+}
+
+// Return & Refund Policy Content
+function getReturnContent() {
+    return `
+        <h2>🔄 Return & Refund Policy</h2>
+        <p><strong>Last Updated:</strong> January 1, 2025</p>
+        
+        <h3>Returns</h3>
+        <p>Due to the perishable nature of our products, we do not accept returns. However, if there is an issue with your order, please contact us within 2 hours of delivery.</p>
+        
+        <h3>Refunds</h3>
+        <p>Refunds are issued in the following cases:</p>
+        <ul>
+            <li>Wrong cake delivered</li>
+            <li>Cake arrives damaged</li>
+            <li>Cancellation within 48 hours of order (custom cakes excluded)</li>
+        </ul>
+        
+        <h3>How to Request a Refund</h3>
+        <p>Contact us at refunds@matacake.com with your order number and photos of the issue (if applicable).</p>
+        
+        <h3>Processing Time</h3>
+        <p>Refunds are processed within 5-7 business days.</p>
+    `;
+}
+
+// Shipping Policy Content
+function getShippingContent() {
+    return `
+        <h2>🚚 Shipping & Delivery Policy</h2>
+        <p><strong>Last Updated:</strong> January 1, 2025</p>
+        
+        <h3>Delivery Areas</h3>
+        <p>We deliver to Colombo and suburbs. Contact us for delivery to other areas.</p>
+        
+        <h3>Delivery Charges</h3>
+        <ul>
+            <li>Within Colombo 3-5: Free delivery</li>
+            <li>Colombo suburbs: Rs. 500 - Rs. 1000</li>
+            <li>Outside Colombo: Contact for quote</li>
+        </ul>
+        
+        <h3>Delivery Time</h3>
+        <ul>
+            <li>Standard cakes: 2-3 days</li>
+            <li>Custom cakes: 5-7 days</li>
+            <li>Express delivery: Next day (extra charge)</li>
+        </ul>
+        
+        <h3>Delivery Hours</h3>
+        <p>Deliveries are made between 9am - 7pm, Monday to Saturday.</p>
+    `;
+}
+
+// FAQ Content
+function getFAQContent() {
+    return `
+        <h2>❓ Frequently Asked Questions</h2>
+        
+        <h3>How far in advance should I order?</h3>
+        <p>For standard cakes, 2-3 days advance notice is recommended. For custom cakes, please order 5-7 days in advance.</p>
+        
+        <h3>Do you offer gluten-free or vegan options?</h3>
+        <p>Yes, we offer gluten-free and vegan options. Please specify your requirements in the custom order form.</p>
+        
+        <h3>Can I get a cake delivered on Sunday?</h3>
+        <p>Yes, we deliver on Sundays between 10am - 5pm.</p>
+        
+        <h3>Do you accept last-minute orders?</h3>
+        <p>We accept last-minute orders subject to availability. Please call us directly for urgent orders.</p>
+        
+        <h3>What payment methods do you accept?</h3>
+        <p>We accept cash on delivery, bank transfer, and online payments.</p>
+        
+        <h3>Can I customize the cake design?</h3>
+        <p>Absolutely! Use our Custom Order form to describe your dream cake design.</p>
+    `;
+}
+</script>
 </html>
