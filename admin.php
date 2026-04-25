@@ -191,7 +191,9 @@ $admin_page = isset($_GET['admin_page']) ? $_GET['admin_page'] : 'dashboard';
     <div class="admin-container">
         <!-- Sidebar -->
         <div class="sidebar">
-            <h2><i class="fas fa-cake-candles"></i> Mata Cake</h2>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px;">
+                <img src="image/logo.png" alt="Mata Cake" style="height: 100px; width: auto; object-fit: contain;">
+            </div>
             <a href="?admin_page=dashboard" class="<?php echo $admin_page == 'dashboard' ? 'active' : ''; ?>"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
             <a href="?admin_page=categories" class="<?php echo $admin_page == 'categories' ? 'active' : ''; ?>"><i class="fas fa-tags"></i> Categories</a>
             <a href="?admin_page=products" class="<?php echo $admin_page == 'products' ? 'active' : ''; ?>"><i class="fas fa-cake"></i> Products</a>
