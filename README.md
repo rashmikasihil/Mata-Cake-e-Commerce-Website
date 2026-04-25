@@ -40,4 +40,3 @@ A complete full-stack web application for an artisan bakery and cake shop. This 
 | **Font Awesome** | Icons for UI elements |
 | **Google Fonts** | Playfair Display & Inter fonts |
 
-## 📁 Project Structure
