@@ -288,7 +288,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
         .btn { display: inline-block; padding: 0.8rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 600; transition: 0.3s; border: none; cursor: pointer; }
         .btn-primary { background: #c4723a; color: white; }
         .btn-primary:hover { background: #a05a2a; transform: translateY(-2px); }
-        .btn-secondary { background: #2d5a3e; color: white; }
+        .btn-secondary { background: #2d5a3e; color: white; margin-top: 20px; }
         
         /* Hero */
         .hero { background: linear-gradient(135deg, #f8e4d0, #fcecd8); padding: 5rem 0; text-align: center; border-radius: 0 0 50px 50px; }
@@ -567,6 +567,28 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
             font-size: 0.9rem;
             color: #e0cfbc;        /* footer text color */
         }
+        .product-img {
+            height: 220px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f9ede0, #f5e0ce);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.08);
+        }
+
+        /* Placeholder Style */
+        .product-img img[src*="placeholder"] {
+            object-fit: contain;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
@@ -607,32 +629,49 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
             </div>
         </section>
         <section class="featured-products">
-            <div class="container">
-                <h2 class="section-title">✨ Our Signature Collection</h2>
-                <div class="products-grid">
-                    <?php
-                    $result = $conn->query("SELECT * FROM products LIMIT 6");
-                    while($product = $result->fetch_assoc()):
-                    ?>
-                    <div class="product-card">
-                        <div class="product-img">🍰</div>
-                        <div class="product-info">
-                            <h3><?php echo $product['name']; ?></h3>
-                            <p><?php echo $product['description']; ?></p>
-                            <div class="product-price">Rs. <?php echo number_format($product['price'], 2); ?></div>
-                            <form method="POST">
-                                <input type="hidden" name="add_to_cart" value="1">
-                                <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                                <input type="hidden" name="product_name" value="<?php echo $product['name']; ?>">
-                                <input type="hidden" name="product_price" value="<?php echo $product['price']; ?>">
-                                <button type="submit" class="add-to-cart">Add to Cart</button>
-                            </form>
-                        </div>
-                    </div>
-                    <?php endwhile; ?>
+    <div class="container">
+        <h2 class="section-title">✨ Our Signature Collection</h2>
+        <div class="products-grid">
+            <?php
+            // Manual image mapping by product ID
+            $image_map = [
+                1 => 'image/1.jpg',
+                2 => 'image/2.jpg',
+                3 => 'image/3.png',
+                4 => 'image/4.webp',
+                5 => 'image/5.webp',
+                6 => 'image/6.webp',
+            ];
+            
+            $result = $conn->query("SELECT * FROM products LIMIT 6");
+            while($product = $result->fetch_assoc()):
+                $product_image = isset($image_map[$product['id']]) 
+                    ? $image_map[$product['id']] 
+                    : 'images/cakes/cake-placeholder.jpg';
+            ?>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="<?php echo $product_image; ?>" 
+                         alt="<?php echo $product['name']; ?>" 
+                         class="product-image">
+                </div>
+                <div class="product-info">
+                    <h3><?php echo $product['name']; ?></h3>
+                    <p><?php echo $product['description']; ?></p>
+                    <div class="product-price">Rs. <?php echo number_format($product['price'], 2); ?></div>
+                    <form method="POST">
+                        <input type="hidden" name="add_to_cart" value="1">
+                        <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                        <input type="hidden" name="product_name" value="<?php echo $product['name']; ?>">
+                        <input type="hidden" name="product_price" value="<?php echo $product['price']; ?>">
+                        <button type="submit" class="add-to-cart">Add to Cart</button>
+                    </form>
                 </div>
             </div>
-        </section>
+            <?php endwhile; ?>
+        </div>
+    </div>
+</section>
         <div class="container">
             <div class="custom-section">
                 <h2>🎂 Craving Something Unique?</h2>
@@ -642,31 +681,57 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
         </div>
 
     <?php elseif ($page == 'cakes'): ?>
-        <div class="container">
-            <h2 class="section-title">🍰 All Cakes</h2>
-            <div class="products-grid">
-                <?php
-                $result = $conn->query("SELECT * FROM products");
-                while($product = $result->fetch_assoc()):
-                ?>
-                <div class="product-card">
-                    <div class="product-img">🍰</div>
-                    <div class="product-info">
-                        <h3><?php echo $product['name']; ?></h3>
-                        <p><?php echo $product['description']; ?></p>
-                        <div class="product-price">Rs. <?php echo number_format($product['price'], 2); ?></div>
-                        <form method="POST">
-                            <input type="hidden" name="add_to_cart" value="1">
-                            <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-                            <input type="hidden" name="product_name" value="<?php echo $product['name']; ?>">
-                            <input type="hidden" name="product_price" value="<?php echo $product['price']; ?>">
-                            <button type="submit" class="add-to-cart">Add to Cart</button>
-                        </form>
-                    </div>
+         <div class="container">
+        <h2 class="section-title">🍰 All Cakes</h2>
+        <div class="products-grid">
+            <?php
+            // Manual image mapping by product ID (same as home page)
+            $image_map = [
+                1 => 'image/1.jpg',
+                2 => 'image/2.jpg',
+                3 => 'image/3.png',
+                4 => 'image/4.webp',
+                5 => 'image/5.webp',
+                6 => 'image/6.webp',
+            ];
+            
+            $result = $conn->query("SELECT * FROM products");
+            while($product = $result->fetch_assoc()):
+                // Get image from mapping or use placeholder
+                $product_image = isset($image_map[$product['id']]) 
+                    ? $image_map[$product['id']] 
+                    : 'image/cake-placeholder.jpg';
+                
+                // Check if image file exists
+                if(!file_exists($product_image)) {
+                    $product_image = 'image/cake-placeholder.jpg';
+                }
+            ?>
+            <div class="product-card">
+                <div class="product-img">
+                    <img src="<?php echo $product_image; ?>" 
+                         alt="<?php echo $product['name']; ?>" 
+                         class="product-image"
+                         onerror="this.src='image/cake-placeholder.jpg'">
                 </div>
-                <?php endwhile; ?>
+                <div class="product-info">
+                    <h3><?php echo $product['name']; ?></h3>
+                    <p><?php echo $product['description']; ?></p>
+                    <div class="product-price">Rs. <?php echo number_format($product['price'], 2); ?></div>
+                    <form method="POST">
+                        <input type="hidden" name="add_to_cart" value="1">
+                        <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+                        <input type="hidden" name="product_name" value="<?php echo $product['name']; ?>">
+                        <input type="hidden" name="product_price" value="<?php echo $product['price']; ?>">
+                        <button type="submit" class="add-to-cart">
+                            <i class="fas fa-cart-plus"></i> Add to Cart
+                        </button>
+                    </form>
+                </div>
             </div>
+            <?php endwhile; ?>
         </div>
+    </div>
 
     <?php elseif ($page == 'custom'): ?>
         <div class="container">
@@ -813,7 +878,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2025 Mata Cake. All rights reserved. | Designed with <i class="fas fa-heart"></i> for cake lovers</p>
+            <p>&copy; 2026 Mata Cake. All rights reserved. | Designed with <i class="fas fa-heart"></i> for cake lovers</p>
         </div>
     </div>
 </footer>
